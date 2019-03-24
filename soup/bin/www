@@ -45,16 +45,21 @@ io.on('connection', (socket) => {
     /** socket.broadcast.to(room).emit('newPublic','some one joined '); */
   })
   socket.on('loginJoin', (rooms) => {
-    console.log(rooms)
+    console.log(socket.id)
     rooms.map((val,index) => {
       socket.join(val)
     })
     console.log(socket.adapter.rooms)
   })
   socket.on('joinRoom', ({room,user}) => {
+    cosnole.log('join room join room join room join room join room join room join room join room join room')
       joinRoom(room,user);
       socket.join(room);
       console.log(socket);
+  })
+  socket.on('startChat', ({user,room,msg}) => {
+    console.log(user,room,msg)
+    io.in(room).emit('newMsg',msg)
   })
 })
 /**
